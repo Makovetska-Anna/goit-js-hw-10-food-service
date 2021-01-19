@@ -1,12 +1,9 @@
-'use strict';
 import './styles.css';
 import menu from './menu.json';
 import template from './template.hbs';
 
 ////шаблонна розмітка
-const markup = menu.reduce((acc, dish) => {
-  return acc + template(dish);
-}, '');
+const markup = template(menu);
 const container = document.querySelector('.js-menu');
 container.insertAdjacentHTML('afterbegin', markup);
 
@@ -18,7 +15,7 @@ const Theme = {
   DARK: 'dark-theme',
 };
 
-const themeMaker = function() {
+function themeMaker() {
   if (switchInput.checked) {
     body.classList.remove(Theme.LIGHT);
     body.classList.add(Theme.DARK);
@@ -28,14 +25,14 @@ const themeMaker = function() {
   body.classList.remove(Theme.DARK);
   body.classList.add(Theme.LIGHT);
   localStorage.setItem('Theme', Theme.LIGHT);
-};
+}
 
-const pointerPossitioning = function() {
+function pointerPossitioning() {
   if (localStorage.getItem('Theme') === 'dark-theme') {
     body.classList.add(Theme.DARK);
     switchInput.checked = true;
   }
-};
+}
 
 switchInput.addEventListener('click', themeMaker);
 pointerPossitioning();
